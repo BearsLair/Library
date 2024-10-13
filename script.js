@@ -48,7 +48,11 @@ function addBookToLibrary() {
 function displayBookCollection() {
   myLibrary.map((el) => {
     const book = document.createElement("p");
-    book.textContent = `Title: ${el.title}    Author: ${el.author}   Pages: ${el.pages}    Was Read: ${el["was-read"]}`;
+    book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
+      el.pages
+    }    Was Read: ${el["was-read"] ? "Yes" : "No"} <button id="read ${
+      el.id
+    }">Was Read?</button> <button id="delete ${el.id}">Delete Book</button>`;
     bookCollection.appendChild(book);
   });
 }
