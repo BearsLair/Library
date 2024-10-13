@@ -1,4 +1,7 @@
 const bookCollection = document.querySelector(".book-list");
+const newBookBtn = document.querySelector("#newBook");
+const dialog = document.querySelector("dialog");
+const closeModal = document.querySelector("dialog #closeModal");
 
 const myLibrary = [
   {
@@ -26,12 +29,20 @@ const myLibrary = [
 
 displayBookCollection();
 
+newBookBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeModal.addEventListener("click", () => {
+  dialog.close();
+});
+
 function Book() {
   // the constructor...
 }
 
 function addBookToLibrary() {
-  // do stuff here...
+  e.preventDefault();
 }
 
 function displayBookCollection() {

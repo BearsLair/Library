@@ -8,29 +8,33 @@
   </head>
   <body>
     <h1>Library</h1>
-    <form class="inputs">
-      <div>
-        <div class="title">
-          <label for="title">Title</label>
-          <input id="title" type="text" placeholder="Title..." />
+    <button id="newBook">New Book</button>
+    <dialog>
+      <form class="inputs">
+        <div>
+          <div class="title">
+            <label for="title">Title</label>
+            <input autofocus id="title" type="text" placeholder="Title..." />
+          </div>
+          <div class="author">
+            <label for="author">Author</label>
+            <input id="author" type="text" placeholder="Author..." />
+          </div>
+          <div class="pages">
+            <label for="pages">Pages</label>
+            <input id="pages" type="number" placeholder="Pages..." />
+          </div>
+          <div class="was-read">
+            <label for="was-read">Read</label>
+            <input id="was-read" type="checkbox" />
+          </div>
         </div>
-        <div class="author">
-          <label for="author">Author</label>
-          <input id="author" type="text" placeholder="Author..." />
+        <div>
+          <input id="submit" type="submit" value="Submit" />
         </div>
-        <div class="pages">
-          <label for="pages">Pages</label>
-          <input id="pages" type="number" placeholder="Pages..." />
-        </div>
-        <div class="was-read">
-          <label for="was-read">Read</label>
-          <input id="was-read" type="checkbox" />
-        </div>
-      </div>
-      <div>
-        <input id="submit" type="submit" value="Submit" />
-      </div>
-    </form>
+        <button id="closeModal">Close</button>
+      </form>
+    </dialog>
     <hr />
     <div class="book-list"></div>
 
