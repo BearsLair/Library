@@ -70,4 +70,14 @@ function deleteABook(book) {
   displayBookCollection();
 }
 
-function wasRead(book) {}
+function wasRead(book) {
+  if (myLibrary[book]["was-read"] === false) {
+    myLibrary[book]["was-read"] = true;
+  } else if (myLibrary[book]["was-read"] === true) {
+    myLibrary[book]["was-read"] = false;
+  }
+
+  displayBookCollection();
+
+  console.log(myLibrary);
+}
