@@ -46,17 +46,28 @@ function addBookToLibrary() {
 }
 
 function displayBookCollection() {
+  bookCollection.innerHTML = "";
+
   myLibrary.map((el) => {
     const book = document.createElement("p");
     book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
       el.pages
-    }    Was Read: ${el["was-read"] ? "Yes" : "No"} <button id="read ${
-      el.id
-    }">Was Read?</button> <button id="delete ${el.id}">Delete Book</button>`;
+    }    Was Read: ${
+      el["was-read"] ? "Yes" : "No"
+    } <button onClick="wasRead(${myLibrary.indexOf(
+      el
+    )})">Was Read?</button> <button onClick="deleteABook(${myLibrary.indexOf(
+      el
+    )}
+    )">Delete Book</button>`;
+
     bookCollection.appendChild(book);
   });
 }
 
-function deleteABook() {
-  // do stuff here...
+function deleteABook(book) {
+  myLibrary.splice(book, 1);
+  displayBookCollection();
 }
+
+function wasRead(book) {}
