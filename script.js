@@ -2,27 +2,13 @@ const bookCollection = document.querySelector(".book-list");
 const newBookBtn = document.querySelector("#newBook");
 const dialog = document.querySelector("dialog");
 const closeModal = document.querySelector("dialog #closeModal");
+const userBookTitle = document.querySelector("dialog #title");
+const userBookAuthor = document.querySelector("dialog #author");
+const userBookPages = document.querySelector("dialog #pages");
+const userBookRead = document.querySelector("dialog #read");
+const submit = document.querySelector("#submit");
 
-const myLibrary = [
-  // {
-  //   title: "Book 1",
-  //   author: "Patrick",
-  //   pages: 256,
-  //   "was-read": true,
-  // },
-  // {
-  //   title: "Book 2",
-  //   author: "Melvin",
-  //   pages: 129,
-  //   "was-read": false,
-  // },
-  // {
-  //   title: "Book 3",
-  //   author: "Beatrice",
-  //   pages: 92,
-  //   "was-read": true,
-  // }
-];
+const myLibrary = [];
 
 displayBookCollection();
 
@@ -34,15 +20,27 @@ closeModal.addEventListener("click", () => {
   dialog.close();
 });
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+submit.addEventListener("click", () => {
+  addBookToLibrary();
+  dialog.close();
+  displayBookCollection();
+});
 
 function addBookToLibrary() {
-  e.preventDefault();
+  const title = userBookTitle.value;
+  const author = userBookAuthor.value;
+  const pages = userBookPages.value;
+  const read = userBookRead.value;
+
+  function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  const userBook = new Book(title, author, pages, read);
+  myLibrary.push(userBook);
 }
 
 function displayBookCollection() {
@@ -53,7 +51,7 @@ function displayBookCollection() {
     book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
       el.pages
     }    Was Read: ${
-      el["was-read"] ? "Yes" : "No"
+      el.read ? "Yes" : "No"
     } <button onClick="wasRead(${myLibrary.indexOf(
       el
     )})">Was Read?</button> <button onClick="deleteABook(${myLibrary.indexOf(
@@ -78,6 +76,4 @@ function wasRead(book) {
   }
 
   displayBookCollection();
-
-  console.log(myLibrary);
 }
