@@ -20,17 +20,22 @@ closeModal.addEventListener("click", () => {
   dialog.close();
 });
 
-submit.addEventListener("click", () => {
-  addBookToLibrary();
-  dialog.close();
-  displayBookCollection();
-});
-
 function addBookToLibrary() {
+  event.preventDefault();
+  bookCollection.innerHTML = "";
+
   const title = userBookTitle.value;
   const author = userBookAuthor.value;
   const pages = userBookPages.value;
-  const read = userBookRead.value;
+  let wasRead = userBookRead.value;
+
+  let read = null;
+
+  if (wasRead === "true") {
+    read = true;
+  } else if (wasRead === "false") {
+    read = false;
+  }
 
   function Book(title, author, pages, read) {
     this.title = title;
@@ -41,20 +46,20 @@ function addBookToLibrary() {
 
   const userBook = new Book(title, author, pages, read);
   myLibrary.push(userBook);
+
+  displayBookCollection();
 }
 
 function displayBookCollection() {
-  bookCollection.innerHTML = "";
-
   myLibrary.map((el) => {
     const book = document.createElement("p");
     book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
       el.pages
     }    Was Read: ${
       el.read ? "Yes" : "No"
-    } <button onClick="wasRead(${myLibrary.indexOf(
+    } <button onclick="wasRead(${myLibrary.indexOf(
       el
-    )})">Was Read?</button> <button onClick="deleteABook(${myLibrary.indexOf(
+    )})">Was Read?</button> <button onclick="deleteABook(${myLibrary.indexOf(
       el
     )}
     )">Delete Book</button>`;
@@ -69,11 +74,13 @@ function deleteABook(book) {
 }
 
 function wasRead(book) {
-  if (myLibrary[book].read === false) {
-    myLibrary[book].read = true;
-  } else if (myLibrary[book].read === true) {
-    myLibrary[book].read = false;
+  if (myLibrary[book].read === true) {
+    myLibrary[book].read === false;
+  } else if (myLibrary[book].read === false) {
+    myLibrary[book].read === true;
   }
+
+  console.log(myLibrary);
 
   displayBookCollection();
 }
