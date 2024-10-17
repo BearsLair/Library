@@ -6,7 +6,6 @@ const userBookTitle = document.querySelector("dialog #title");
 const userBookAuthor = document.querySelector("dialog #author");
 const userBookPages = document.querySelector("dialog #pages");
 const userBookRead = document.querySelector("dialog #read");
-const userBookNotRead = document.querySelector("dialog #notread");
 const submit = document.querySelector("#submit");
 
 const myLibrary = [];
@@ -19,12 +18,24 @@ newBookBtn.addEventListener("click", () => {
 
 closeModal.addEventListener("click", (e) => {
   e.preventDefault();
+
+  userBookTitle.value = "";
+  userBookAuthor.value = "";
+  userBookPages.value = "";
+  userBookRead.checked = false;
   dialog.close();
 });
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
+
   addBookToLibrary();
+
+  userBookTitle.value = "";
+  userBookAuthor.value = "";
+  userBookPages.value = "";
+  userBookRead.checked = false;
+
   dialog.close();
 });
 
@@ -34,12 +45,7 @@ function addBookToLibrary() {
   const title = userBookTitle.value;
   const author = userBookAuthor.value;
   const pages = userBookPages.value;
-  const wasRead = userBookRead.value;
-
-  console.log("Radio button value selected is ", userBookRead.value);
-  console.log("Type of input for radio button is ", typeof userBookRead.value);
-
-  let read = null;
+  const read = userBookRead.checked;
 
   //NEED checkbox for read status
 
@@ -83,15 +89,11 @@ function deleteABook(book) {
 }
 
 function wasRead(book) {
-  if (myLibrary[book][read] === true) {
-    myLibrary[book][read] = false;
-    console.log("Read changed to false");
-  } else if (myLibrary[book][read] === false) {
-    myLibrary[book][read] = true;
-    console.log("Read changed to true");
+  if (myLibrary[book].read === true) {
+    myLibrary[book].read = false;
+  } else if (myLibrary[book].read === false) {
+    myLibrary[book].read = true;
   }
-
-  console.log(myLibrary);
 
   displayBookCollection();
 }
