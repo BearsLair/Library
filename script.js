@@ -6,6 +6,7 @@ const userBookTitle = document.querySelector("dialog #title");
 const userBookAuthor = document.querySelector("dialog #author");
 const userBookPages = document.querySelector("dialog #pages");
 const userBookRead = document.querySelector("dialog #read");
+const userBookNotRead = document.querySelector("dialog #notread");
 const submit = document.querySelector("#submit");
 
 const myLibrary = [];
@@ -16,26 +17,33 @@ newBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
-closeModal.addEventListener("click", () => {
+closeModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+  addBookToLibrary();
   dialog.close();
 });
 
 function addBookToLibrary() {
-  event.preventDefault();
   bookCollection.innerHTML = "";
 
   const title = userBookTitle.value;
   const author = userBookAuthor.value;
   const pages = userBookPages.value;
-  let wasRead = userBookRead.value;
+  const wasRead = userBookRead.value;
+
+  console.log("Radio button value selected is ", userBookRead.value);
+  console.log("Type of input for radio button is ", typeof userBookRead.value);
 
   let read = null;
 
-  if (wasRead === "true") {
-    read = true;
-  } else if (wasRead === "false") {
-    read = false;
-  }
+  //NEED checkbox for read status
+
+  console.log("read equals ", read);
 
   function Book(title, author, pages, read) {
     this.title = title;
@@ -51,6 +59,7 @@ function addBookToLibrary() {
 }
 
 function displayBookCollection() {
+  bookCollection.innerHTML = "";
   myLibrary.map((el) => {
     const book = document.createElement("p");
     book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
@@ -74,10 +83,12 @@ function deleteABook(book) {
 }
 
 function wasRead(book) {
-  if (myLibrary[book].read === true) {
-    myLibrary[book].read === false;
-  } else if (myLibrary[book].read === false) {
-    myLibrary[book].read === true;
+  if (myLibrary[book][read] === true) {
+    myLibrary[book][read] = false;
+    console.log("Read changed to false");
+  } else if (myLibrary[book][read] === false) {
+    myLibrary[book][read] = true;
+    console.log("Read changed to true");
   }
 
   console.log(myLibrary);
