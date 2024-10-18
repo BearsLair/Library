@@ -56,6 +56,12 @@ dialog .submitclose {
   margin-top: 10px;
 }
 
+.author,
+.pages,
+.read {
+  margin-top: 10px;
+}
+
 .submitclose button {
   font-size: 1.2rem;
   border-radius: 5px;
