@@ -47,8 +47,6 @@ function addBookToLibrary() {
   const pages = userBookPages.value;
   const read = userBookRead.checked;
 
-  //NEED checkbox for read status
-
   console.log("read equals ", read);
 
   function Book(title, author, pages, read) {
@@ -68,16 +66,21 @@ function displayBookCollection() {
   bookCollection.innerHTML = "";
   myLibrary.map((el) => {
     const book = document.createElement("p");
-    book.innerHTML = `Title: ${el.title}    Author: ${el.author}   Pages: ${
+    book.innerHTML = `<span class="orderNumber">${
+      myLibrary.indexOf(el) + 1
+    }. </span><span class="userTitle">Title: ${
+      el.title
+    }</span><span class="userAuthor">Author: ${
+      el.author
+    }</span><span class="userPages">Pages: ${
       el.pages
-    }    Was Read: ${
+    }</span><span class="userRead">Was Read: ${
       el.read ? "Yes" : "No"
-    } <button onclick="wasRead(${myLibrary.indexOf(
+    }<button onclick="wasRead(${myLibrary.indexOf(
       el
-    )})">Was Read?</button> <button onclick="deleteABook(${myLibrary.indexOf(
+    )})">Change</button></span><span class="userDelete"><button onclick="deleteABook(${myLibrary.indexOf(
       el
-    )}
-    )">Delete Book</button>`;
+    )})">Delete Book</button>`;
 
     bookCollection.appendChild(book);
   });

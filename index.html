@@ -8,10 +8,12 @@
   </head>
   <body>
     <h1>Library</h1>
-    <button id="newBook">New Book</button>
+    <div class="btn-div">
+      <button id="newBook">New Book</button>
+    </div>
     <dialog>
       <form action="#">
-      <div>
+      <div class="labelsandinputs">
         <div class="title">
           <label for="title">Title</label>
           <input autofocus id="title" type="text" placeholder="Title..." />
@@ -29,8 +31,11 @@
           <input id="read" type="checkbox" />
         </div>
       </div>
+      <hr />
+      <div class="submitclose">
       <div><button id="submit">Submit</button></div>
       <button id="closeModal">Close</button>
+    </div>
     </dialog>
     <hr />
     <div class="book-list"></div>
